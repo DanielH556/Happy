@@ -8,7 +8,7 @@ export default {
     async index(request: Request, response: Response) {
         const orphanagesRepository = getRepository(Orphanage);
 
-        const orphanages = await orphanagesRepository.fing({
+        const orphanages = await orphanagesRepository.find({
             relations: ['images'],
         });
 
@@ -20,7 +20,7 @@ export default {
 
         const orphanagesRepository = getRepository(Orphanage);
 
-        const orphanage = await orphanagesRepository.findOneOfFail(id, {
+        const orphanage = await orphanagesRepository.findOneOrFail(id, {
             relations: ['images'],
         });
 
@@ -55,7 +55,7 @@ export default {
             about,
             instructions,
             opening_hours,
-            open_on_weekends,
+            open_on_weekends: open_on_weekends === 'true',
             images,
         };
 
